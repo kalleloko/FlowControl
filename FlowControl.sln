@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36623.8 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowControl", "FlowControl\FlowControl.csproj", "{DDF033DD-CFEB-4A48-A85F-5472B0B49D1C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DDF033DD-CFEB-4A48-A85F-5472B0B49D1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDF033DD-CFEB-4A48-A85F-5472B0B49D1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDF033DD-CFEB-4A48-A85F-5472B0B49D1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDF033DD-CFEB-4A48-A85F-5472B0B49D1C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D5E2A62-52B8-44F2-B77B-CF1A10E45DA3}
+	EndGlobalSection
+EndGlobal
