@@ -33,12 +33,17 @@ public class ConsoleUI : IUI
         }
     }
 
-    public T SelectInput<T>(Dictionary<char, T> options, string? prompt = null, string? errorMessage = "Ogiltigt val, försök igen!")
+    public string SelectInput(Dictionary<char, string> options, string? prompt = null, string? errorMessage = "Ogiltigt val, försök igen!")
     {
+        return SelectInput(options, (v) => v,  prompt, errorMessage);
+    }
+    public T SelectInput<T>(Dictionary<char, T> options, Func<T, string> displayFunc, string? prompt = null, string ? errorMessage = "Ogiltigt val, försök igen!")
+    {   
         PrintLine(prompt);
         foreach (KeyValuePair<char, T> kvp in options)
         {
-            PrintLine($"{kvp.Key}: {kvp.Value}");
+            string display = displayFunc(kvp.Value);
+            PrintLine($"{kvp.Key}: {display}");
         }
         char selected = AskForInput<char>("Välj ett alternativ: ", errorMessage);
         if (options.ContainsKey(selected))
@@ -48,7 +53,7 @@ public class ConsoleUI : IUI
         else
         {
             PrintErrorLine(errorMessage);
-            return SelectInput<T>(options, prompt, errorMessage);
+            return SelectInput<T>(options, displayFunc, prompt, errorMessage);
         }
     }
 
@@ -121,5 +126,11 @@ public class ConsoleUI : IUI
         throw new FormatException($"Could not parse '{input}' to {typeof(T).Name}.");
     }
 
-    
+    public void PrintEmptyLines(int lineCount = 1)
+    {
+        for(int i = 0; i < lineCount; i ++)
+        {
+            Console.WriteLine();
+        }
+    }
 }
