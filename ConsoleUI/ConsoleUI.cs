@@ -17,7 +17,7 @@ public class ConsoleUI : IUI
 
         string? input = Console.ReadLine();
 
-        try 
+        try
         {
             return ParseValue<T>(input);
         }
@@ -31,9 +31,59 @@ public class ConsoleUI : IUI
             PrintErrorLine(errorMessage);
             return AskForInput<T>(prompt, errorMessage);
         }
-
     }
 
+    public T SelectInput<T>(Dictionary<char, T> options, string? prompt = null, string? errorMessage = "Ogiltigt val, försök igen!")
+    {
+        PrintLine(prompt);
+        foreach (KeyValuePair<char, T> kvp in options)
+        {
+            PrintLine($"{kvp.Key}: {kvp.Value}");
+        }
+        char selected = AskForInput<char>("Välj ett alternativ: ", errorMessage);
+        if (options.ContainsKey(selected))
+        {
+            return options[selected];
+        }
+        else
+        {
+            PrintErrorLine(errorMessage);
+            return SelectInput<T>(options, prompt, errorMessage);
+        }
+    }
+
+
+    /// <summary>
+    /// Displays the specified prompt message to the console if it is not null, empty, or whitespace.
+    /// </summary>
+    /// <param name="prompt">The message to display. If null, empty, or whitespace, no output is produced.</param>
+    public void PrintLine(string? prompt)
+    {
+        if (!string.IsNullOrWhiteSpace(prompt))
+        {
+            Console.WriteLine(prompt);
+        }
+    }
+
+    /// <summary>
+    /// Displays the specified prompt message to the console if it is not null, empty, or whitespace.
+    /// </summary>
+    /// <param name="prompt">The message to display. If null, empty, or whitespace, no output is produced.</param>
+    public void PrintErrorLine(string? prompt)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        PrintLine(prompt);
+        Console.ResetColor();
+    }
+
+    /// <summary>
+    /// Try to parse the input string to type T using T.TryParse.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    /// <exception cref="NotSupportedException">Thrown when T doesn't have TryParse method</exception>
+    /// <exception cref="FormatException">Thrown when input could not be parsed into T</exception>
     private static T ParseValue<T>(string? input)
     {
         // special case for strings
@@ -71,27 +121,5 @@ public class ConsoleUI : IUI
         throw new FormatException($"Could not parse '{input}' to {typeof(T).Name}.");
     }
 
-
-    /// <summary>
-    /// Displays the specified prompt message to the console if it is not null, empty, or whitespace.
-    /// </summary>
-    /// <param name="prompt">The message to display. If null, empty, or whitespace, no output is produced.</param>
-    public void PrintLine(string? prompt)
-    {
-        if (!string.IsNullOrWhiteSpace(prompt))
-        {
-            Console.WriteLine(prompt);
-        }
-    }
-
-    /// <summary>
-    /// Displays the specified prompt message to the console if it is not null, empty, or whitespace.
-    /// </summary>
-    /// <param name="prompt">The message to display. If null, empty, or whitespace, no output is produced.</param>
-    public void PrintErrorLine(string? prompt)
-    {
-        Console.ForegroundColor = ConsoleColor.Red;
-        PrintLine(prompt);
-        Console.ResetColor();
-    }
+    
 }

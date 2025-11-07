@@ -7,15 +7,12 @@ internal class Program
     static void Main(string[] args)
     {
         IUI ui = new ConsoleUI();
-        int testint = ui.AskForInput<int>("Skriv ett int: ", "Nej nej");
-        Console.WriteLine(testint);
-        char testchar = ui.AskForInput<char>("Skriv ett char: ");
-        Console.WriteLine(testchar);
-        float testfloat = ui.AskForInput<float>("Skriv ett float: ");
-        Console.WriteLine(testfloat);
-        long testlong = ui.AskForInput<long>("Skriv ett long: ");
-        Console.WriteLine(testlong);
-        DateTime testDateTime = ui.AskForInput<DateTime>("Skriv ett DateTime: ");
-        Console.WriteLine(testDateTime);
+        int ans = ui.SelectInput<int>(new Dictionary<char, int>()
+        {
+            {'a', 1 },
+            {'b', 2 },
+            {'c', 3 },
+        }, "Välj en siffra:");
+        Console.WriteLine(ans);
     }
 }
