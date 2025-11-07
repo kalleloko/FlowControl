@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36623.8 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowControl", "FlowControl\FlowControl.csproj", "{DDF033DD-CFEB-4A48-A85F-5472B0B49D1C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "ConsoleUI\Utilities.csproj", "{DDC835AA-C66E-4996-89D6-09552D94F3BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{DDF033DD-CFEB-4A48-A85F-5472B0B49D1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDF033DD-CFEB-4A48-A85F-5472B0B49D1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDF033DD-CFEB-4A48-A85F-5472B0B49D1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDC835AA-C66E-4996-89D6-09552D94F3BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDC835AA-C66E-4996-89D6-09552D94F3BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDC835AA-C66E-4996-89D6-09552D94F3BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDC835AA-C66E-4996-89D6-09552D94F3BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
