@@ -2,5 +2,5 @@
 
 public interface IUI
 {
-    public T AskForInput<T>(string prompt = "", string errorMessage = "");
+    public T AskForInput<T>(string? prompt = null, string? errorMessage = "Ogiltigt värde, försök igen!");
 }
