@@ -8,12 +8,14 @@ internal class FlowControlTask
 
     private readonly Dictionary<char, KeyValuePair<string, Action>> menu;
 
+    private const int stringRepeaterCount = 10;
+
     public FlowControlTask(IUI ui)
     {
         this.ui = ui;
         menu = new Dictionary<char, KeyValuePair<string, Action>>(){
             { '1', new ("Ta reda på pris", GetCinemaPrice) },
-            //{ '2', new ("Visa pågående uppgifter", ShowOngoingTasks) },
+            { '2', new ("Repetera text", RepeatText) },
             //{ '3', new ("Avsluta uppgift", EndTask) },
             { '0', new ("Avsluta programmet", ExitProgram) }
         };
@@ -28,14 +30,16 @@ internal class FlowControlTask
     {
         while (true)
         {
-            ui.PrintLine("--------------------------");
-            KeyValuePair<string, Action> choice = ui.SelectInput(menu, (kvp) => kvp.Key, "Välj ett alternativ:");
-            ui.PrintLine("--------------------------");
+            KeyValuePair<string, Action> choice = ui.SelectInput(
+                menu,
+                (kvp) => kvp.Key,
+                ui.FormatSquare("Huvudmenu")
+            );
+            ui.PrintLine("─────────────────────────────────");
+            ui.PrintEmptyLines();
             choice.Value.Invoke();
-            if (choice.Key.Equals('Q'))
-            {
-                break;
-            }
+            ui.PrintLine("─────────────────────────────────"); 
+            ui.PrintEmptyLines();
         }
     }
 
@@ -84,9 +88,14 @@ internal class FlowControlTask
         }
         ui.PrintEmptyLines();
     }
-    private void ShowOngoingTasks()
+    private void RepeatText()
     {
-        ui.PrintLine("ShowOngoingTasks");
+        string input = ui.AskForInput<string>($"Skriv något om du vill se det {stringRepeaterCount} gånger");
+        for (int i = 0; i < stringRepeaterCount; i++)
+        {
+            ui.Print($"{i + 1}. {input}, ");
+        }
+        ui.PrintEmptyLines();
     }
     private void EndTask()
     {
