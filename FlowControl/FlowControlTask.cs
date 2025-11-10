@@ -14,7 +14,7 @@ internal class FlowControlTask
     {
         this.ui = ui;
         menu = new Dictionary<char, KeyValuePair<string, Action>>(){
-            { '1', new ("Ta reda på pris", GetCinemaPrice) },
+            { '1', new ("Biobiljetter", GetCinemaPrice) },
             { '2', new ("Repetera text", RepeatText) },
             { '3', new ("Det tredje ordet", ThirdWord) },
             { '0', new ("Avsluta programmet", ExitProgram) }
@@ -67,9 +67,17 @@ internal class FlowControlTask
             string pricePrefix;
             switch (age)
             {
+                case < 5:
+                    price = 0;
+                    pricePrefix = "Barn";
+                    break;
                 case < 20:
                     price = 80;
                     pricePrefix = "Ungdomspris";
+                    break;
+                case >= 100:
+                    price = 0;
+                    pricePrefix = "Hundra +";
                     break;
                 case > 64:
                     price = 90;
