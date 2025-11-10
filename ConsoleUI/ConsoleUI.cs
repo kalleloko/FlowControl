@@ -46,6 +46,7 @@ public class ConsoleUI : IUI
             string display = displayFunc(kvp.Value);
             PrintLine($"{kvp.Key}: {display}");
         }
+        PrintEmptyLines();
         char selected = AskForInput<char>("Välj ett alternativ: ", errorMessage);
         if (options.ContainsKey(selected))
         {
@@ -143,11 +144,8 @@ public class ConsoleUI : IUI
     {
         StringBuilder sb = new StringBuilder();
         int length = content.Length + 6;
-        string emptyString = new string(' ', content.Length);
         sb.AppendLine("┌" + (new string('─', length)) + "┐");
-        sb.AppendLine($"│   {emptyString}   │");
         sb.AppendLine($"│   {content}   │");
-        sb.AppendLine($"│   {emptyString}   │");
         sb.AppendLine("└" + (new string('─', length)) + "┘");
         return sb.ToString();
     }

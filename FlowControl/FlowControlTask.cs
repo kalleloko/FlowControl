@@ -16,7 +16,7 @@ internal class FlowControlTask
         menu = new Dictionary<char, KeyValuePair<string, Action>>(){
             { '1', new ("Ta reda på pris", GetCinemaPrice) },
             { '2', new ("Repetera text", RepeatText) },
-            //{ '3', new ("Avsluta uppgift", EndTask) },
+            { '3', new ("Det tredje ordet", ThirdWord) },
             { '0', new ("Avsluta programmet", ExitProgram) }
         };
     }
@@ -38,6 +38,7 @@ internal class FlowControlTask
             ui.PrintLine("─────────────────────────────────");
             ui.PrintEmptyLines();
             choice.Value.Invoke();
+            ui.PrintEmptyLines();
             ui.PrintLine("─────────────────────────────────"); 
             ui.PrintEmptyLines();
         }
@@ -86,7 +87,6 @@ internal class FlowControlTask
         {
             ui.PrintLine($"Totalt pris för {count} personer: {totalPrice}kr");
         }
-        ui.PrintEmptyLines();
     }
     private void RepeatText()
     {
@@ -97,13 +97,35 @@ internal class FlowControlTask
         }
         ui.PrintEmptyLines();
     }
-    private void EndTask()
+    private void ThirdWord()
     {
-        ui.PrintLine("EndTask");
+        string? thirdWord = null;
+        while (true)
+        {
+            string input = ui.AskForInput<string>("Skriv en mening med minst tre ord:");
+            thirdWord = extractThirdWord(input);
+            if(thirdWord != null)
+            {
+                break;
+            }
+            ui.PrintErrorLine("Meningen måste innehålla minst tre ord. Försök igen.");
+        }
+        ui.PrintLine($"Det tredje ordet är: {thirdWord}");
+    }
+
+    private string? extractThirdWord(string input)
+    {
+        string[] words = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (words.Length < 3)
+        {
+            return null;
+        }
+        string thirdWord = words[2];
+        return thirdWord;
     }
     private void ExitProgram()
     {
-        ui.PrintLine("ExitProgram");
+        ui.PrintLine("Avslutar...");
         System.Environment.Exit(0);
     }
 
