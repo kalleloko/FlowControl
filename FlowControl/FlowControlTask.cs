@@ -21,11 +21,18 @@ internal class FlowControlTask
         };
     }
 
+    /// <summary>
+    /// perform the programs main loop
+    /// </summary>
     internal void initUILoop()
     {
         initUILoop(this.menu);
     }
 
+    /// <summary>
+    /// perform a menu loop with the given menu
+    /// </summary>
+    /// <param name="menu"></param>
     internal void initUILoop(Dictionary<char, KeyValuePair<string, Action>> menu)
     {
         while (true)
@@ -44,6 +51,9 @@ internal class FlowControlTask
         }
     }
 
+    /// <summary>
+    /// Calculates and displays the cinema ticket price for a group of people based on their ages.
+    /// </summary>
     private void GetCinemaPrice()
     {
         int count = ui.AskForInput<int>("Hur många är ni?", "Svara med en siffra, tack!");
@@ -96,6 +106,10 @@ internal class FlowControlTask
             ui.PrintLine($"Totalt pris för {count} personer: {totalPrice}kr");
         }
     }
+
+    /// <summary>
+    /// Prompts the user for input and displays the entered text a specified number of times.
+    /// </summary>
     private void RepeatText()
     {
         string input = ui.AskForInput<string>($"Skriv något om du vill se det {stringRepeaterCount} gånger");
@@ -105,13 +119,17 @@ internal class FlowControlTask
         }
         ui.PrintEmptyLines();
     }
+
+    /// <summary>
+    /// Promps the user for a sentence and extracts the third word from it.
+    /// </summary>
     private void ThirdWord()
     {
         string? thirdWord = null;
         while (true)
         {
             string input = ui.AskForInput<string>("Skriv en mening med minst tre ord:");
-            thirdWord = extractThirdWord(input);
+            thirdWord = ExtractThirdWord(input);
             if(thirdWord != null)
             {
                 break;
@@ -121,7 +139,12 @@ internal class FlowControlTask
         ui.PrintLine($"Det tredje ordet är: {thirdWord}");
     }
 
-    private string? extractThirdWord(string input)
+    /// <summary>
+    /// Split the input string and return the third word, or null if there are less than three words.
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns>The third word</returns>
+    private string? ExtractThirdWord(string input)
     {
         string[] words = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         if (words.Length < 3)
@@ -131,6 +154,10 @@ internal class FlowControlTask
         string thirdWord = words[2];
         return thirdWord;
     }
+
+    /// <summary>
+    /// Exits the program after informing the user.
+    /// </summary>
     private void ExitProgram()
     {
         ui.PrintLine("Avslutar...");

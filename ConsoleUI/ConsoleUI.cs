@@ -5,13 +5,7 @@ namespace FlowControl.Utilities;
 
 public class ConsoleUI : IUI
 {
-    /// <summary>
-    /// Ask the user for input of type T. Uses T.TryParse to validate input.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="prompt">The question or instruction, if any</param>
-    /// <param name="errorMessage">Message to display on parsing error</param>
-    /// <returns></returns>
+    /// <inheritdoc/>
     public T AskForInput<T>(string? prompt, string? errorMessage)
     {
         PrintLine(prompt);
@@ -34,10 +28,13 @@ public class ConsoleUI : IUI
         }
     }
 
+    /// <inheritdoc/>
     public string SelectInput(Dictionary<char, string> options, string? prompt = null, string? errorMessage = "Ogiltigt val, försök igen!")
     {
         return SelectInput(options, (v) => v,  prompt, errorMessage);
     }
+
+    /// <inheritdoc/>
     public T SelectInput<T>(Dictionary<char, T> options, Func<T, string> displayFunc, string? prompt = null, string ? errorMessage = "Ogiltigt val, försök igen!")
     {   
         PrintLine(prompt);
@@ -59,15 +56,16 @@ public class ConsoleUI : IUI
         }
     }
 
+    /// <inheritdoc/>
     public void Print(string? prompt)
     {
         Console.Write(prompt);
     }
 
+    /// <inheritdoc/>
     /// <summary>
-    /// Displays the specified prompt message to the console if it is not null, empty, or whitespace.
+    /// Does nothing if prompt is null, empty, or whitespace.
     /// </summary>
-    /// <param name="prompt">The message to display. If null, empty, or whitespace, no output is produced.</param>
     public void PrintLine(string? prompt)
     {
         if (!string.IsNullOrWhiteSpace(prompt))
@@ -76,10 +74,10 @@ public class ConsoleUI : IUI
         }
     }
 
+    /// <inheritdoc/>
     /// <summary>
-    /// Displays the specified prompt message to the console if it is not null, empty, or whitespace.
+    /// Does nothing if prompt is null, empty, or whitespace.
     /// </summary>
-    /// <param name="prompt">The message to display. If null, empty, or whitespace, no output is produced.</param>
     public void PrintErrorLine(string? prompt)
     {
         Console.ForegroundColor = ConsoleColor.Red;
@@ -132,6 +130,7 @@ public class ConsoleUI : IUI
         throw new FormatException($"Could not parse '{input}' to {typeof(T).Name}.");
     }
 
+    /// <inheritdoc/>
     public void PrintEmptyLines(int lineCount = 1)
     {
         for(int i = 0; i < lineCount; i ++)
@@ -140,6 +139,7 @@ public class ConsoleUI : IUI
         }
     }
 
+    /// <inheritdoc/>
     public string FormatSquare(string content)
     {
         StringBuilder sb = new StringBuilder();
