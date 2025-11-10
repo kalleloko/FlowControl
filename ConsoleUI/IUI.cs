@@ -8,8 +8,12 @@ public interface IUI
     //public T AskFor
     public string SelectInput(Dictionary<char, string> options, string? prompt = null, string? errorMessage = "Ogiltigt val, försök igen!");
     public T SelectInput<T>(Dictionary<char, T> options, Func<T, string> displayFunc, string? prompt = null, string ? errorMessage = "Ogiltigt val, försök igen!");
+    public void Print(string? prompt);
     public void PrintLine(string? prompt);
     public void PrintErrorLine(string? prompt);
 
     public void PrintEmptyLines(int lineCount = 1);
+
+    public string FormatSquare(string content);
+
 }

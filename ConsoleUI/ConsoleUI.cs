@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Text;
 
 namespace FlowControl.Utilities;
 
@@ -57,6 +58,10 @@ public class ConsoleUI : IUI
         }
     }
 
+    public void Print(string? prompt)
+    {
+        Console.Write(prompt);
+    }
 
     /// <summary>
     /// Displays the specified prompt message to the console if it is not null, empty, or whitespace.
@@ -132,5 +137,18 @@ public class ConsoleUI : IUI
         {
             Console.WriteLine();
         }
+    }
+
+    public string FormatSquare(string content)
+    {
+        StringBuilder sb = new StringBuilder();
+        int length = content.Length + 6;
+        string emptyString = new string(' ', content.Length);
+        sb.AppendLine("┌" + (new string('─', length)) + "┐");
+        sb.AppendLine($"│   {emptyString}   │");
+        sb.AppendLine($"│   {content}   │");
+        sb.AppendLine($"│   {emptyString}   │");
+        sb.AppendLine("└" + (new string('─', length)) + "┘");
+        return sb.ToString();
     }
 }
